@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eden Trees | Fine Art Sculpture</title>
+    
+    <!-- Importing Luxury Fonts: Playfair Display (Serif) and Lato (Sans-Serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-deep: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --accent-gold: #c5a059; /* Muted Champagne Gold */
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 60px;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+        }
+
+        /* Logo Styles */
+        .brand {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        /* INCREASED SIZE FOR TOP LEFT LOGO */
+        .brand img {
+            display: block;
+            height: 120px; 
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Specific style for flag image link */
+        #lang-btn img {
+            height: 25px; 
+            width: auto;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        
+        #lang-btn img:hover {
+            opacity: 1.0;
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            height: 90vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 70%);
+        }
+
+        header h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            animation: fadeMove 2s infinite;
+        }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-section {
+            padding: 100px 10%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 80px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #fff;
+        }
+
+        .section-header span {
+            color: var(--accent-gold);
+            font-style: italic;
+            font-family: var(--font-serif);
+        }
+
+        /* FIX: REMOVED EXTRA PARENTHESIS THAT BROKE GRID */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 60px 40px;
+        }
+
+        .art-piece {
+            group: cursor;
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        /* The luxury hover effect */
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            filter: grayscale(20%); 
+        }
+
+        .art-piece:hover .image-wrapper img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .art-details h3 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .art-details p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background-color: var(--accent-gold);
+            margin: 15px 0;
+            transition: width 0.3s ease;
+        }
+
+        .art-piece:hover .divider {
+            width: 100px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #050505;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 1px solid #151515;
+            position: relative; /* Needed for logo positioning */
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 18px 45px;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            transition: all 0.4s ease;
+            margin-top: 20px;
+        }
+
+        .contact-btn:hover {
+            background-color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: #000;
+        }
+
+        footer p {
+            color: #444;
+            font-size: 0.8rem;
+            margin-top: 50px;
+        }
+
+        /* --- BIG LOGO IN BOTTOM RIGHT --- */
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.15; /* Very subtle */
+            width: 250px; 
+            height: auto;
+            pointer-events: none; /* Doesn't block clicks */
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeMove {
+            0% { opacity: 0.4; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(5px); }
+            100% { opacity: 0.4; transform: translateY(0); }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { padding: 30px; }
+            .nav-links { display: none; } 
+            header h1 { font-size: 3rem; }
+            
+            /* Mobile grid fix */
+            .gallery-grid { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .image-wrapper { height: 400px; }
+            
+            /* Smaller bottom logo on mobile */
+            .footer-logo {
+                width: 150px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <!-- TOP LEFT LOGO (BIGGER) -->
+        <a href="#" class="brand">
+            <img src="logo.png" alt="Eden Trees Logo">
+        </a>
+        
+        <div class="nav-links">
+            <a href="#collection" id="nav-collection">The Collection</a>
+            <a href="about.html" id="nav-atelier">The Atelier</a>
+            <a href="#contact" id="nav-contact">Inquire</a>
+            
+            <!-- FLAG IMAGE BUTTON -->
+            <a href="#" onclick="switchLanguage()" id="lang-btn">
+                <img src="flag-se.png" alt="Switch Language">
+            </a>
+      
+        </div>
+    </nav>
+ 
+    <!-- Hero Section -->
+    <header>
+        <h1>Elegance in<br>Every Strand.</h1>
+        <p>Hand-sculpted wire art capturing the organic beauty of nature using metal wire.</p>
+        <div class="scroll-indicator">Scroll</div>
+    </header>
+
+    <!-- Gallery Section -->
+    <main id="collection" class="gallery-section">
+        <div class="section-header">
+            <h2>The Collection</h2>
+            <span>Selected Works</span>
+        </div>
+
+        <div class="gallery-grid">
+         
+            <!-- Art Piece 1 -->
+            <div class="art-piece">
+                <div class="image-wrapper">
+                   <img src="./tree1.jpeg" alt="Copper Oak">
+                </div>
+                <div class="art-details">
+                    <h3>The Copper Oak</h3>
+                    <div class="divider"></div>
+                    <p>Raw copper twisted around a bed of raw amethyst crystals.</p>
+                </div>
+            </div>
+
+            <!-- Art Piece 2 -->
+            <div class="art-piece">
+                <div class="image-wrapper">
+                    <img src="tree2.jpeg" alt="Silver Willow">
+                </div>
+                <div class="art-details">
+                    <h3>Silver Willow</h3>
+                    <div class="divider"></div>
+                    <p>Oxidized silver strands on a polished black slate base.</p>
+                </div>
+            </div>
+
+            <!-- Art Piece 3 -->
+            <div class="art-piece">
+                <div class="image-wrapper">
+                    <img src="tree3.jpeg" alt="Golden Bonsai">
+                </div>
+                <div class="art-details">
+                    <h3>Imperial Bonsai</h3>
+                    <div class="divider"></div>
+                    <p>24k gold-plated wire anchored in ancient driftwood.</p>
+                </div>
+            </div>
+
+            <!-- Art Piece 4 -->
+            <div class="art-piece">
+                <div class="image-wrapper">
+                    <img src="tree4.jpeg" alt="Sapphire Pine">
+                </div>
+                <div class="art-details">
+                    <h3>Sapphire Pine</h3>
+                    <div class="divider"></div>
+                    <p>Steel wire structure with hand-faceted glass leaves.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer / Contact -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h2>Commission a Masterpiece</h2>
+            
+            <!-- FIX: Added ID="footer-subtitle" here -->
+            <p id="footer-subtitle" style="color: #888; margin-top: 10px; font-style: italic;">Each piece is unique. Contact for availability.</p>
+            
+            <a href="contact.html" class="contact-btn">Make an Inquiry</a>
+            <br><br>
+            <p>&copy; 2023 Eden Trees. All Rights Reserved.</p>
+            
+            <!-- BIG LOGO IN BOTTOM RIGHT -->
+            <img src="logo.png" alt="Eden Trees Logo" class="footer-logo">
+        </div>
+    </footer>
+
+
+
+<script>
+    // Define your translations here
+    const translations = {
+        en: {
+            heroTitle: "Elegance in<br>Every Strand.",
+            heroText: "Hand-sculpted wire art capturing the organic beauty of nature through metallic precision.",
+            collectionTitle: "The Collection",
+            selectedWorks: "Selected Works",
+            scrollText: "Scroll",
+            atelierTitle: "FAQ",
+            inquireTitle: "Inquire",
+            btnInquire: "Make an Inquiry",
+            btnCommission: "Commission a Masterpiece",
+            footerSubtitle: "Each piece is unique. Contact for availability.", // FIX: Added English Key
+            tree1Title: "The Copper Oak",
+            tree1Desc: "Raw copper twisted around a bed of raw amethyst crystals.",
+            tree2Title: "Silver Willow",
+            tree2Desc: "Oxidized silver strands on a polished black slate base.",
+            tree3Title: "Imperial Bonsai",
+            tree3Desc: "24k gold-plated wire anchored in ancient driftwood.",
+            tree4Title: "Sapphire Pine",
+            tree4Desc: "Steel wire structure with hand-faceted glass leaves."
+        },
+        sv: {
+            heroTitle: "Elegans i<br>Varje Tråd.",
+            heroText: "Handskulpterad trådkonst som fångar naturens organiska skönhet genom metallisk precision.",
+            collectionTitle: "Kollektionen",
+            selectedWorks: "Utvalda Verk",
+            scrollText: "Scrolla",
+            atelierTitle: "Vanliga Frågor",
+            inquireTitle: "Kontakta Oss", 
+            btnInquire: "Skicka förfrågan",
+            btnCommission: "För Frågor och Beställningar",
+            footerSubtitle: "Hör gärna av dig nedan.", // FIX: Added Swedish Key
+            tree1Title: "Ohio xD",
+            tree1Desc: "Rå koppar vriden runt en bädd av råa ametistkristaller.",
+            tree2Title: "Silverpil",
+            tree2Desc: "Oxiderade silvertrådar på en polerad svart skifferskiva.",
+            tree3Title: "Imperial Bonsai",
+            tree3Desc: "24 karats guldpläterad tråd förankrad i antikt drivved.",
+            tree4Title: "Safirtall",
+            tree4Desc: "Ståltrådsstruktur med handslipade glasblad."
+        }
+    };
+
+    let currentLang = 'en';
+
+    // --- FUNCTION TO UPDATE THE FLAG IMAGE ---
+    function updateFlag() {
+        const img = document.querySelector('#lang-btn img');
+        if (currentLang === 'en') {
+            img.src = 'flag-se.png'; // Show Swedish flag
+            img.alt = "Switch to Swedish";
+        } else {
+            img.src = 'flag-uk.png'; // Show UK flag
+            img.alt = "Switch to English";
+        }
+    }
+
+    function switchLanguage() {
+        // Toggle language
+        currentLang = currentLang === 'en' ? 'sv' : 'en';
+        const t = translations[currentLang];
+
+        // Update Navigation Menu (Top Bar)
+        document.getElementById('nav-collection').innerText = t.collectionTitle;
+        document.getElementById('nav-atelier').innerText = t.atelierTitle;
+        document.getElementById('nav-contact').innerText = t.inquireTitle;
+
+        // Update Hero Section
+        document.querySelector('header h1').innerHTML = t.heroTitle;
+        document.querySelector('header p').innerText = t.heroText;
+
+        // Update Scroll Indicator
+        document.querySelector('.scroll-indicator').innerText = t.scrollText;
+
+        // Update Section Titles
+        document.querySelector('.section-header h2').innerText = t.collectionTitle;
+        document.querySelector('.section-header span').innerText = t.selectedWorks;
+        
+        document.querySelector('#contact h2').innerText = t.btnCommission;
+
+        // Update Buttons
+        const mainBtn = document.querySelector('footer .contact-btn');
+        if(mainBtn) mainBtn.innerText = t.btnInquire; 
+
+        // --- FIX: UPDATE FOOTER SUBTITLE ---
+        const footerSubtitle = document.getElementById('footer-subtitle');
+        if(footerSubtitle) footerSubtitle.innerText = t.footerSubtitle;
+
+        // Update Tree 1
+        const tree1 = document.querySelectorAll('.art-details')[0];
+        tree1.querySelector('h3').innerText = t.tree1Title;
+        tree1.querySelector('p').innerText = t.tree1Desc;
+
+        // Update Tree 2
+        const tree2 = document.querySelectorAll('.art-details')[1];
+        tree2.querySelector('h3').innerText = t.tree2Title;
+        tree2.querySelector('p').innerText = t.tree2Desc;
+
+        // Update Tree 3
+        const tree3 = document.querySelectorAll('.art-details')[2];
+        tree3.querySelector('h3').innerText = t.tree3Title;
+        tree3.querySelector('p').innerText = t.tree3Desc;
+
+        // Update Tree 4
+        const tree4 = document.querySelectorAll('.art-details')[3];
+        tree4.querySelector('h3').innerText = t.tree4Title;
+        tree4.querySelector('p').innerText = t.tree4Desc;
+        
+        // Call the flag update function
+        updateFlag();
+    }
+</script>
+
+</body>
+</html>

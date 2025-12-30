@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Eden Trees</title>
+    <!-- Importing Luxury Fonts to match main site -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            background-color: #0a0a0a; 
+            color: #e0e0e0; 
+            font-family: 'Lato', sans-serif; 
+            padding: 100px 20px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #c5a059;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #888;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        a { 
+            color: #c5a059; 
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+        a:hover { opacity: 0.7; }
+
+        /* --- LANGUAGE BUTTON STYLES --- */
+        #lang-switcher {
+            position: fixed;
+            top: 40px;
+            right: 60px;
+            cursor: pointer;
+            z-index: 100;
+        }
+        #lang-switcher img {
+            height: 25px;
+            width: auto;
+            opacity: 0.8;
+            border-radius: 2px;
+            transition: opacity 0.3s;
+        }
+        #lang-switcher img:hover {
+            opacity: 1.0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LANGUAGE SWITCHER (Reuses flag icons) -->
+    <div id="lang-switcher" onclick="toggleLanguage()">
+        <img id="lang-img" src="flag-se.png" alt="Switch Language">
+    </div>
+
+    <!-- CONTENT -->
+    <h1 id="page-title">About The Artist</h1>
+    <p id="page-bio">This is where your bio goes. You can write about your inspiration, your process with wire, and your history as an artist.</p>
+    <br><br>
+    <a href="index.html" id="back-link">Back to Home</a>
+
+    <script>
+        // Translations
+        const translations = {
+            en: {
+                title: "About The Artist",
+                bio: "This is where your bio goes. You can write about your inspiration, your process with wire, and your history as an artist.",
+                back: "Back to Home"
+            },
+            sv: {
+                title: "Om Konstnären",
+                bio: "Här skriver du din biografi. Du kan skriva om din inspiration, din process med tråd och din historia som konstnär.",
+                back: "Tillbaka till Hemmet"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            // Toggle language state
+            currentLang = currentLang === 'en' ? 'sv' : 'en';
+            const t = translations[currentLang];
+
+            // Update Text
+            document.getElementById('page-title').innerText = t.title;
+            document.getElementById('page-bio').innerText = t.bio;
+            document.getElementById('back-link').innerText = t.back;
+
+            // Update Flag Icon (Reuses same files)
+            const img = document.getElementById('lang-img');
+            if (currentLang === 'en') {
+                img.src = 'flag-se.png';
+            } else {
+                img.src = 'flag-uk.png';
+            }
+        }
+    </script>
+</body>
+</html>

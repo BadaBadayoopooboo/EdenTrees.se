@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inquire | Atelier Wire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0a0a;
+            --accent-gold: #c5a059;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Lato', sans-serif;
+        }
+        body {
+            background-color: var(--bg-deep);
+            color: #e0e0e0;
+            font-family: var(--font-sans);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            position: relative; /* Needed for flag positioning */
+        }
+        .contact-container {
+            background-color: #141414;
+            padding: 60px;
+            max-width: 600px;
+            width: 100%;
+            border: 1px solid #222;
+            text-align: center;
+        }
+        h1 {
+            font-family: var(--font-serif);
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+        p {
+            color: #888;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus {
+            border-color: var(--accent-gold);
+        }
+        button {
+            background-color: #fff;
+            color: #000;
+            border: none;
+            padding: 18px 45px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: var(--accent-gold);
+        }
+        .back-link {
+            display: block;
+            margin-top: 40px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        .back-link:hover {
+            color: var(--accent-gold);
+        }
+
+        /* --- FLAG BUTTON STYLE --- */
+        #lang-switcher {
+            position: absolute;
+            top: 40px;
+            right: 60px;
+            cursor: pointer;
+            z-index: 100;
+        }
+        #lang-switcher img {
+            height: 25px;
+            width: auto;
+            opacity: 0.8;
+            border-radius: 2px;
+            transition: opacity 0.3s;
+        }
+        #lang-switcher img:hover {
+            opacity: 1.0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LANGUAGE SWITCHER -->
+    <div id="lang-switcher" onclick="toggleContactLang()">
+        <img id="lang-img" src="flag-se.png" alt="Switch Language">
+    </div>
+
+    <div class="contact-container">
+        <h1 id="page-title">Private Inquiry</h1>
+        <p id="page-desc">For commissions and sales inquiries.</p>
+
+        <form action="mailto:your.email@example.com" method="post" enctype="text/plain">
+            
+            <div class="form-group">
+                <label id="lbl-name">Name</label>
+                <input type="text" id="inp-name" name="name" placeholder="Your Name" required>
+            </div>
+
+            <div class="form-group">
+                <label id="lbl-email">Email</label>
+                <input type="email" id="inp-email" name="email" placeholder="Your Email Address" required>
+            </div>
+
+            <div class="form-group">
+                <label id="lbl-msg">Message</label>
+                <textarea id="inp-msg" name="message" rows="5" placeholder="Tell me about the tree you are interested in..." required></textarea>
+            </div>
+
+            <button type="submit" id="btn-submit">Send Inquiry</button>
+        </form>
+
+        <a href="index.html" id="btn-back" class="back-link">Return to Gallery</a>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                title: "Private Inquiry",
+                desc: "For commissions and sales inquiries.",
+                lName: "Name",
+                lEmail: "Email",
+                lMsg: "Message",
+                pName: "Your Name",
+                pEmail: "Your Email Address",
+                pMsg: "Tell me about the tree you are interested in...",
+                submit: "Send Inquiry",
+                back: "Return to Gallery"
+            },
+            sv: {
+                title: "Privat Förfrågan",
+                desc: "För beställningar och försäljningsförfrågningar.",
+                lName: "Namn",
+                lEmail: "E-post",
+                lMsg: "Meddelande",
+                pName: "Ditt Namn",
+                pEmail: "Din E-postadress",
+                pMsg: "Berätta för mig om trädet du är intresserad av...",
+                submit: "Skicka Förfrågan",
+                back: "Tillbaka till Galleriet"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function toggleContactLang() {
+            // Switch Language
+            currentLang = currentLang === 'en' ? 'sv' : 'en';
+            const t = translations[currentLang];
+
+            // Translate Title & Desc
+            document.getElementById('page-title').innerText = t.title;
+            document.getElementById('page-desc').innerText = t.desc;
+
+            // Translate Labels
+            document.getElementById('lbl-name').innerText = t.lName;
+            document.getElementById('lbl-email').innerText = t.lEmail;
+            document.getElementById('lbl-msg').innerText = t.lMsg;
+
+            // Translate Placeholders (The text inside the boxes)
+            document.getElementById('inp-name').placeholder = t.pName;
+            document.getElementById('inp-email').placeholder = t.pEmail;
+            document.getElementById('inp-msg').placeholder = t.pMsg;
+
+            // Translate Buttons
+            document.getElementById('btn-submit').innerText = t.submit;
+            document.getElementById('btn-back').innerText = t.back;
+
+            // Update Flag
+            const img = document.getElementById('lang-img');
+            if (currentLang === 'en') {
+                img.src = 'flag-se.png';
+            } else {
+                img.src = 'flag-uk.png';
+            }
+        }
+    </script>
+</body>
+</html>
