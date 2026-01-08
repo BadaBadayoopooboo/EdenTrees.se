@@ -125,8 +125,8 @@
         <h1 id="page-title">Private Inquiry</h1>
         <p id="page-desc">For commissions and sales inquiries.</p>
 
-        <!-- IMPORTANT: id="contactForm" is required for the script to find it -->
-        <form id="contactForm">
+        <!-- CHANGED: Added onsubmit="sendEmail(event)" directly here -->
+        <form onsubmit="sendEmail(event)">
             
             <div class="form-group">
                 <label id="lbl-name">Name</label>
@@ -211,26 +211,24 @@
             }
         }
 
-        // --- THIS IS THE CODE THAT MAKES THE BUTTON WORK ---
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            // 1. Stop the browser from reloading the page
-            e.preventDefault();
+        // --- SIMPLIFIED EMAIL FUNCTION ---
+        function sendEmail(e) {
+            // 1. Stop the page from refreshing
+            e.preventDefault(); 
 
-            // 2. Get the text the user typed
+            // 2. Get values
             const name = document.getElementById('inp-name').value;
             const email = document.getElementById('inp-email').value;
             const message = document.getElementById('inp-msg').value;
 
-            // 3. Build the email body
-            // We use %0D%0A to create new lines in the email
-            const emailBody = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+            // 3. Build the Mailto Link
+            // We use simple variables to avoid encoding errors
             const subject = "New Inquiry from Eden Trees";
+            const body = "Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message;
 
-            // 4. Open the user's email app
-            // This works on Windows (Outlook), Mac (Mail), Android (Gmail), iOS (Mail)
-            window.location.href = `mailto:edentreesgbg@gmail.com?subject=${encodeURIComponent(subject)}&body=${emailBody}`;
-        });
+            // 4. Open Email App
+            window.location.href = "mailto:edentreesgbg@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+        }
     </script>
 </body>
 </html>
-
