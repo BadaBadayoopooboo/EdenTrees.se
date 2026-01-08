@@ -125,7 +125,8 @@
         <h1 id="page-title">Private Inquiry</h1>
         <p id="page-desc">For commissions and sales inquiries.</p>
 
-        <form action="mailto:your.email@example.com" method="post" enctype="text/plain">
+        <!-- CHANGED: Removed action/method. Added ID and onsubmit. -->
+        <form id="contactForm">
             
             <div class="form-group">
                 <label id="lbl-name">Name</label>
@@ -192,7 +193,7 @@
             document.getElementById('lbl-email').innerText = t.lEmail;
             document.getElementById('lbl-msg').innerText = t.lMsg;
 
-            // Translate Placeholders (The text inside the boxes)
+            // Translate Placeholders
             document.getElementById('inp-name').placeholder = t.pName;
             document.getElementById('inp-email').placeholder = t.pEmail;
             document.getElementById('inp-msg').placeholder = t.pMsg;
@@ -209,6 +210,23 @@
                 img.src = 'flag-uk.png';
             }
         }
+
+        // --- NEW SCRIPT TO SEND EMAIL ---
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop the form from reloading the page
+
+            // 1. Get the values
+            const name = document.getElementById('inp-name').value;
+            const email = document.getElementById('inp-email').value;
+            const message = document.getElementById('inp-msg').value;
+
+            // 2. Create the mailto link (Phone/Gmail will catch this automatically)
+            const subject = "Inquiry from Eden Trees";
+            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+            
+            // This opens the user's chosen email app (Gmail, Apple Mail, etc.)
+            window.location.href = `mailto:edentreesgbg@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+        });
     </script>
 </body>
 </html>
